@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;//required for buttons and TextMeshPro
+using TMPro; //required for TextMeshPro
 
 public class GameManager : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class GameManager : MonoBehaviour
     public Rigidbody Ball;
 
     public Text ScoreText;
+    public GameObject hiScoreText;
     public GameObject GameOverText1;
     public GameObject GameOverText2;
 
@@ -22,6 +24,10 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         PopulateBricks();
+        if(GlobalManager.instance != null)
+        {
+            UpdateHighScore();
+        }
     }
     void PopulateBricks()
     {
@@ -39,6 +45,11 @@ public class GameManager : MonoBehaviour
                 brick.onDestroyed.AddListener(AddPoint);
             }
         }
+    }
+    void UpdateHighScore()
+    {
+        hiScoreText.GetComponent<TextMeshProUGUI>().text = GlobalManager.instance.hiScoreName + 
+            " --- " + GlobalManager.instance.hiScore;
     }
     // Update is called once per frame
     private void Update()
@@ -68,8 +79,17 @@ public class GameManager : MonoBehaviour
     {
         m_Points += point;
         ScoreText.text = $"Score : {m_Points}";
+        CheckHiScore();
     }
-
+    void CheckHiScore()
+    {
+        if (m_Points > GlobalManager.instance.hiScore)
+        {
+            GlobalManager.instance.hiScoreName = GlobalManager.instance.playerName;
+            GlobalManager.instance.hiScore = m_Points;
+            UpdateHighScore();
+        }
+    }
     public void GameOver()
     {
         m_GameOver = true;
