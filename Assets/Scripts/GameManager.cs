@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;//required for buttons and TextMeshPro
 
-public class MainManager : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
     public Brick BrickPrefab;
     public int LineCount = 6;
@@ -40,7 +40,7 @@ public class MainManager : MonoBehaviour
             }
         }
     }
-
+    // Update is called once per frame
     private void Update()
     {
         if (!m_Started)
@@ -64,7 +64,6 @@ public class MainManager : MonoBehaviour
             }
         }
     }
-
     void AddPoint(int point)
     {
         m_Points += point;

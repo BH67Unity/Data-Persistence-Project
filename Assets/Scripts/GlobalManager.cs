@@ -45,6 +45,10 @@ public class GlobalManager : MonoBehaviour
     }
     void StartClicked()
     {
+        //get player name
+        playerName = playerNameInput.GetComponent<InputField>().text;
+        
+        //start game
         SceneManager.LoadScene("main");
     }
     void ExitClicked()
@@ -56,6 +60,14 @@ public class GlobalManager : MonoBehaviour
 #endif
     }
     void ResetClicked()
+    {
+
+    }
+    void SaveHiScore()
+    {
+
+    }
+    void LoadHiScore()
     {
 
     }
