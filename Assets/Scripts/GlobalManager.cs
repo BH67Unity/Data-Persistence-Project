@@ -69,6 +69,7 @@ public class GlobalManager : MonoBehaviour
     }
     void ExitClicked()
     {
+        SaveHiScore();
 #if UNITY_EDITOR
         EditorApplication.ExitPlaymode();
 #else
@@ -93,7 +94,7 @@ public class GlobalManager : MonoBehaviour
         public int hiScore;
         public string hiScoreName;
     }
-    void SaveHiScore()
+    public void SaveHiScore()
     {
         //create SaveData object
         SaveData hiScoreData = new SaveData();
@@ -124,6 +125,10 @@ public class GlobalManager : MonoBehaviour
     public void RestartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+    public void ReturnToMenu()
+    {
+        SceneManager.LoadScene("menu");
     }
     // Update is called once per frame
     void Update()

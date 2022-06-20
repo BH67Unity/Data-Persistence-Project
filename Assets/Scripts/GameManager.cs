@@ -96,4 +96,9 @@ public class GameManager : MonoBehaviour
         GameOverText1.SetActive(true);
         GameOverText2.SetActive(true);
     }
+    public void ReturnToMenu()
+    {
+        GlobalManager.instance.SaveHiScore();
+        GlobalManager.instance.ReturnToMenu();
+    }
 }
