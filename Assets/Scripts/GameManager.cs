@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     public GameObject GameOverText1;
     public GameObject GameOverText2;
 
+    private List<Brick> bricks;
     private bool m_Started = false;
     private int m_Points;
 
@@ -36,6 +37,8 @@ public class GameManager : MonoBehaviour
         int perLine = Mathf.FloorToInt(4.0f / step);
 
         int[] pointCountArray = new[] { 1, 1, 2, 2, 5, 5 };
+
+        bricks = new List<Brick>();
         for (int i = 0; i < LineCount; ++i)
         {
             for (int x = 0; x < perLine; ++x)
@@ -43,6 +46,7 @@ public class GameManager : MonoBehaviour
                 Vector3 position = new Vector3(-1.5f + step * x, 2.5f + i * 0.3f, 0);
                 var brick = Instantiate(BrickPrefab, position, Quaternion.identity);
                 brick.PointValue = pointCountArray[i];
+                bricks.Add(brick);
                 brick.onDestroyed.AddListener(AddPoint);
             }
         }
@@ -93,6 +97,17 @@ public class GameManager : MonoBehaviour
     }
     public void GameOver()
     {
+        foreach (Brick brick in bricks)
+        {
+            try
+            {
+                Destroy(brick.gameObject);
+            }
+            //bad programming practice, but in this case, it's easier than trying to keep track of each brick.
+                //we're resetting the list anyway, so it's not a huge deal.
+            catch
+            { }
+        }
         m_GameOver = true;
         GameOverText1.SetActive(true);
         GameOverText2.SetActive(true);
