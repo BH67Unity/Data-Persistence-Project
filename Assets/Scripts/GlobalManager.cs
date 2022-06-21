@@ -26,6 +26,7 @@ public class GlobalManager : MonoBehaviour
     {
         if (instance != null)
         {
+            Destroy(gameObject);
             return;
         }
         instance = this;
@@ -77,16 +78,11 @@ public class GlobalManager : MonoBehaviour
 #endif
     }
     void ResetClicked()
-    {
-        //###SDTZ
-        UpdateHiScore();
-        //###EDTZ
-        /*
+    {       
         hiScore = 0;
         hiScoreName = "Mr. Null";
         UpdateHiScore();
         SaveHiScore();
-        */
     }
     [System.Serializable]
     class SaveData
@@ -130,9 +126,8 @@ public class GlobalManager : MonoBehaviour
     {
         SceneManager.LoadScene("menu");
     }
-    // Update is called once per frame
-    void Update()
+    public void DestroySingleton()
     {
-        
+        Destroy(gameObject);
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;//required for buttons and TextMeshPro
 using TMPro; //required for TextMeshPro
+using UnityEngine.SceneManagement; //required to transition between scenes
 
 public class GameManager : MonoBehaviour
 {
@@ -99,6 +100,7 @@ public class GameManager : MonoBehaviour
     public void ReturnToMenu()
     {
         GlobalManager.instance.SaveHiScore();
-        GlobalManager.instance.ReturnToMenu();
+        GlobalManager.instance.DestroySingleton();
+        SceneManager.LoadScene("menu");
     }
 }
